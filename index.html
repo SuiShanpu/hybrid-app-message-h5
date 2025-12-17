@@ -9,5 +9,20 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+
+    <script src="https://cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js"></script>
+    <script type="text/javascript">new VConsole();</script>
+
+    <script type="text/javascript">
+      function receiveFromFlutter(data) {
+        console.log("receiveFromFlutter data:", data);
+        try {
+          const flutterEvent = new CustomEvent("flutter-to-home", { detail: data }); // 创建自定义事件并携带数据
+          window.dispatchEvent(flutterEvent); // 触发事件
+        } catch (err) {
+          console.warn('Failed to dispatch flutter-message event', err);
+        }
+      }
+    </script>
   </body>
 </html>
