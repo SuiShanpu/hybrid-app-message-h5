@@ -6,6 +6,10 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+import axiosHttp from "@/axios";
+import { 
+  Button as AButton,
+} from 'ant-design-vue';
 
 const defMsg = '这是 vue 中的初始化值';
 const messageModel = ref(defMsg);
@@ -48,6 +52,14 @@ function onUseFlutter() {
 function onUseVue() {
   messageModel.value = defMsg;
 }
+
+/**
+ * 发送请求
+ */
+async function onAction() {
+  const result =  await axiosHttp.get("https://juejin.cn/");
+  console.log("result:", result);
+}
 </script> 
 
 <template>
@@ -61,6 +73,8 @@ function onUseVue() {
       </div>
       <div>{{ messageModel }}</div>
     </div>
+
+    <a-button type="primary" @click="onAction">发送请求</a-button>
   </div>
 </template>
 
